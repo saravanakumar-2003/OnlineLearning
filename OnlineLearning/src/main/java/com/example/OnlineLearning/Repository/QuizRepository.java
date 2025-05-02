@@ -12,4 +12,6 @@ public interface QuizRepository extends JpaRepository<QuizEntity , Integer> {
     List<QuizEntity> findAllByModuleEntity(ModuleEntity moduleId);
 
     QuizEntity findByModuleEntity(ModuleEntity i);
+
+    QuizEntity findByQuizId(int quizId);
 }

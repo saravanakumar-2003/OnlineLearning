@@ -1,20 +1,23 @@
 package com.example.OnlineLearning.Controller;
 
-import com.example.OnlineLearning.DTO.CourseEnrollDTO;
-import com.example.OnlineLearning.DTO.ModuleDTO;
-import com.example.OnlineLearning.DTO.QuizDTO;
+import com.example.OnlineLearning.DTO.*;
+import com.example.OnlineLearning.Repository.ModuleRepository;
+import com.example.OnlineLearning.Repository.QuizCompletedRepository;
 import com.example.OnlineLearning.Service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class CourseController {
 
     @Autowired
     CourseService courseService;
+
+    @Autowired
+    QuizCompletedRepository quizCompletedRepository;
+
+    @Autowired
+    ModuleRepository moduleRepository;
 
     @PostMapping("/addCourse")
     public void addCourse(@RequestParam String course){
@@ -36,4 +39,15 @@ public class CourseController {
     public void enrollCourse(@RequestBody CourseEnrollDTO courseEnrollDTO){
         courseService.enrollCourse(courseEnrollDTO);
     }
+
+    @PutMapping("attendQuiz")
+    public void attendQuiz(@RequestBody AttendQuizDTO attendQuizDTO){
+        courseService.attendQuiz(attendQuizDTO);
+    }
+
+    @PutMapping("attendAssignment")
+    public void attendAssignment(@RequestBody AttendAssignmentDTO attendAssignmentDTO){
+        courseService.attendAssignment(attendAssignmentDTO);
+    }
+
 }
